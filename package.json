@@ -1,14 +1,12 @@
 {
   "name": "angular-intro.js",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Angular directive to wrap intro.js",
   "main": "angular-intro.js",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -40,5 +38,9 @@
     "load-grunt-tasks": "~3.5.2",
     "tslint": "~4.5.1",
     "typescript": "~2.3.4"
+  },
+  "dependencies": {
+    "angular": "^1.4.0",
+    "intro.js": "~2.5.0"
   }
 }
