@@ -8,7 +8,6 @@
     "example": "example"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -40,7 +39,6 @@
     "typescript": "~2.3.4"
   },
   "dependencies": {
-    "bower": "~1.7.9",
     "@types/intro.js": "~2.4.0"
   }
 }
