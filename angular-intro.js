@@ -145,10 +145,33 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
         open: 'open',
         closed: 'closed'
     };
-    this.destroy = [];
 
     return {
         restrict: 'A',
+        destroy: [],
+        scope: {
+            ngIntroMethod: "=",
+            ngIntroExitMethod: "=?",
+            ngIntroNextMethod: "=?",
+            ngIntroPreviousMethod: "=?",
+            ngIntroRefreshMethod: "=?",
+            ngIntroOptions: "=",
+            ngIntroOncomplete: "=",
+            ngIntroOnexit: "=",
+            ngIntroOnchange: "=",
+            ngIntroOnbeforechange: "=",
+            ngIntroOnafterchange: "=",
+            ngIntroAutostart: "=",
+            ngIntroAutorefresh: "=",
+            ngIntroHintsMethod: "=?",
+            ngIntroOnhintsadded: "=",
+            ngIntroOnhintclick: "=?",
+            ngIntroOnhintclose: "=?",
+            ngIntroShowHint: "=?",
+            ngIntroShowHints: "=?",
+            ngIntroHideHint: "=?",
+            ngIntroHideHints: "=?"
+        },
         link: function(scope, element, attrs) {
             if (scope.ngIntroOncomplete) {
                 ngIntroService.onComplete(scope.ngIntroOncomplete);
