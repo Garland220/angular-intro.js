@@ -235,8 +235,10 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
             };
             var autoStartWatch = scope.$watch('ngIntroAutostart', function () {
                 if (scope.ngIntroAutostart) {
+                    var _this = this;
                     $timeout(function () {
-                        scope.ngIntroMethod();
+                        // $parse(attrs.ngIntroMethod)(scope)();
+                        scope.ngIntroMethod.call(_this);
                     });
                 }
                 autoStartWatch();
