@@ -216,29 +216,29 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
                 }
                 autoStartWatch();
             });
-            _this.destroy.push(scope.$on('$locationChangeStart', function () {
-                ngIntroService.exit();
-            }));
-            _this.destroy.push(scope.$on('$locationChangeSuccess', function () {
-                ngIntroService.exit();
-            }));
-            if (scope.ngIntroAutorefresh) {
-                _this.destroy.push(scope.$watch(function () {
-                    ngIntroService.refresh();
-                }));
-            }
-            _this.destroy.push(scope.$on('$destroy', function () {
-                ngIntroService.exit();
-            }));
-            scope.$on("$destroy", function () {
-                clearWatches();
-            });
-            var clearWatches = function () {
-                for (var _i = 0, _a = _this.destroy; _i < _a.length; _i++) {
-                    var d = _a[_i];
-                    d();
-                }
-            };
+            // _this.destroy.push(scope.$on('$locationChangeStart', function () {
+            //     ngIntroService.exit();
+            // }));
+            // _this.destroy.push(scope.$on('$locationChangeSuccess', function () {
+            //     ngIntroService.exit();
+            // }));
+            // if (scope.ngIntroAutorefresh) {
+            //     _this.destroy.push(scope.$watch(function () {
+            //         ngIntroService.refresh();
+            //     }));
+            // }
+            // _this.destroy.push(scope.$on('$destroy', function () {
+            //     ngIntroService.exit();
+            // }));
+            // scope.$on("$destroy", function () {
+            //     clearWatches();
+            // });
+            // var clearWatches = function () {
+            //     for (var _i = 0, _a = _this.destroy; _i < _a.length; _i++) {
+            //         var d = _a[_i];
+            //         d();
+            //     }
+            // };
         }
     }
 }]);
