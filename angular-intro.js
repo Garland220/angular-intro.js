@@ -145,6 +145,7 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
         open: 'open',
         closed: 'closed'
     };
+    this.destroy = [];
 
     return {
         restrict: 'A',
@@ -216,53 +217,53 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
                 }
                 autoStartWatch();
             });
-            // _this.destroy.push(scope.$on('$locationChangeStart', function () {
-            //     ngIntroService.exit();
-            // }));
-            // _this.destroy.push(scope.$on('$locationChangeSuccess', function () {
-            //     ngIntroService.exit();
-            // }));
-            // if (scope.ngIntroAutorefresh) {
-            //     _this.destroy.push(scope.$watch(function () {
-            //         ngIntroService.refresh();
-            //     }));
-            // }
-            // _this.destroy.push(scope.$on('$destroy', function () {
-            //     ngIntroService.exit();
-            // }));
-            // scope.$on("$destroy", function () {
-            //     clearWatches();
-            // });
-            // var clearWatches = function () {
-            //     for (var _i = 0, _a = _this.destroy; _i < _a.length; _i++) {
-            //         var d = _a[_i];
-            //         d();
-            //     }
-            // };
+            this.destroy.push(scope.$on('$locationChangeStart', function () {
+                ngIntroService.exit();
+            }));
+            this.destroy.push(scope.$on('$locationChangeSuccess', function () {
+                ngIntroService.exit();
+            }));
+            if (scope.ngIntroAutorefresh) {
+                this.destroy.push(scope.$watch(function () {
+                    ngIntroService.refresh();
+                }));
+            }
+            this.destroy.push(scope.$on('$destroy', function () {
+                ngIntroService.exit();
+            }));
+            scope.$on("$destroy", function () {
+                clearWatches();
+            });
+            var clearWatches = function () {
+                for (var _i = 0, _a = this.destroy; _i < _a.length; _i++) {
+                    var d = _a[_i];
+                    d();
+                }
+            };
         }
     }
 }]);
 
 
-// ngIntroModule.directive('ngIntroDisableButton', ['ngIntroService', function (ngIntroService) {
-//     var id = 0;
-//     return {
-//         restrict: "A",
-//         priority: 1,
-//         link: function (scope, elm, attrs) {
-//             var uniqueId = 'disabledBtn' + id++;
-//             ngIntroService.addListener(uniqueId, function (value) {
-//                 if (value === introStatus.open) {
-//                     attrs.$set('disabled', 'disabled');
-//                 }
-//                 else {
-//                     delete attrs.disabled;
-//                     elm.removeAttr('disabled');
-//                 }
-//             });
-//             scope.$on('$destroy', function () {
-//                 ngIntroService.removeListener(uniqueId);
-//             });
-//         }
-//     };
-// }]);
+ngIntroModule.directive('ngIntroDisableButton', ['ngIntroService', function (ngIntroService) {
+    var id = 0;
+    return {
+        restrict: "A",
+        priority: 1,
+        link: function (scope, elm, attrs) {
+            var uniqueId = 'disabledBtn' + id++;
+            ngIntroService.addListener(uniqueId, function (value) {
+                if (value === introStatus.open) {
+                    attrs.$set('disabled', 'disabled');
+                }
+                else {
+                    delete attrs.disabled;
+                    elm.removeAttr('disabled');
+                }
+            });
+            scope.$on('$destroy', function () {
+                ngIntroService.removeListener(uniqueId);
+            });
+        }
+    };
+}]);
