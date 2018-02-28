@@ -244,25 +244,25 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
 }]);
 
 
-ngIntroService.directive('ngIntroDisableButton', ['ngIntroService', function (ngIntroService) {
-    var id = 0;
-    return {
-        restrict: "A",
-        priority: 1,
-        link: function (scope, elm, attrs) {
-            var uniqueId = 'disabledBtn' + id++;
-            ngIntroService.addListener(uniqueId, function (value) {
-                if (value === introStatus.open) {
-                    attrs.$set('disabled', 'disabled');
-                }
-                else {
-                    delete attrs.disabled;
-                    elm.removeAttr('disabled');
-                }
-            });
-            scope.$on('$destroy', function () {
-                ngIntroService.removeListener(uniqueId);
-            });
-        }
-    };
-}]);
+// ngIntroModule.directive('ngIntroDisableButton', ['ngIntroService', function (ngIntroService) {
+//     var id = 0;
+//     return {
+//         restrict: "A",
+//         priority: 1,
+//         link: function (scope, elm, attrs) {
+//             var uniqueId = 'disabledBtn' + id++;
+//             ngIntroService.addListener(uniqueId, function (value) {
+//                 if (value === introStatus.open) {
+//                     attrs.$set('disabled', 'disabled');
+//                 }
+//                 else {
+//                     delete attrs.disabled;
+//                     elm.removeAttr('disabled');
+//                 }
+//             });
+//             scope.$on('$destroy', function () {
+//                 ngIntroService.removeListener(uniqueId);
+//             });
+//         }
+//     };
+// }]);
