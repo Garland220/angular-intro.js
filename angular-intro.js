@@ -233,16 +233,14 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
             scope.ngIntroRefreshMethod = function () {
                 this.intro.refresh();
             };
-            var autoStartWatch = scope.$watch('ngIntroAutostart', function () {
-                if (scope.ngIntroAutostart) {
-                    var _this = this;
-                    $timeout(function () {
-                        // $parse(attrs.ngIntroMethod)(scope)();
-                        scope.ngIntroMethod.call(_this);
-                    });
-                }
-                autoStartWatch();
-            });
+            if (scope.ngIntroAutostart) {
+                var _this = this;
+                $timeout(function () {
+                    // $parse(attrs.ngIntroMethod)(scope)();
+                    scope.ngIntroMethod.call(_this);
+                });
+            }
+            // autoStartWatch();
             this.destroy.push(scope.$on('$locationChangeStart', function () {
                 this.intro.exit();
             }));
@@ -257,6 +255,7 @@ ngIntroModule.directive('ngIntroOptions', ['$timeout', '$parse', function ($time
             this.destroy.push(scope.$on('$destroy', function () {
                 this.intro.exit();
             }));
+            scope.intro = this.intro;
             scope.$on("$destroy", function () {
                 clearWatches();
             });
